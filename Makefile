@@ -3,6 +3,8 @@
 PIP ?= pip
 PROJECT_PATH ?= src
 PY_CONFIG_PATH ?= setup.cfg
+FLAKE8 = venv/bin/flake8
+PYTEST = venv/bin/pytest
 
 install: install-local install-test
 
@@ -23,7 +25,8 @@ clean:
 	rm -rf venv/
 
 lint:
-	PYTHONPATH="$(PROJECT_PATH)" python -m flake8 $(PROJECT_PATH) --config=$(PY_CONFIG_PATH)
+	$(FLAKE8) $(PROJECT_PATH) --config=$(PY_CONFIG_PATH)
 
 test:
-	PYTHONPATH="$(PROJECT_PATH)" python -m pytest $(TEST_ARGS)
+	$(PYTEST) $(TEST_ARGS)
+
