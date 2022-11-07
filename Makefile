@@ -29,4 +29,3 @@ lint:
 
 test:
 	$(PYTEST) $(TEST_ARGS)
-
