@@ -32,3 +32,9 @@ jobs:
       - name: Test
         run: |
           make test
+          
+  deployment:
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - name: deploy
