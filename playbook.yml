@@ -1,0 +1,48 @@
+---
+- hosts: all
+  become: yes
+  handlers:
+    - name: Restart Nginx
+      service:
+        name: nginx
+        state: restarted
+
+  tasks:
+    - name: Install Nginx
+      apt:
+        name: nginx
+        state: latest
+      notify: Restart Nginx
+    - name: Install Python 3.9
+      package:
+        name: python3
+        state: present
+    - name: Install pip
+      apt: 
+        name: python3-pip
+        state: present
+    - name: Install click package
+      pip:
+        name: click==8.0.3
+        state: present
+    - name: Install Flask package
+      pip:
+        name: Flask==2.0.2
+        state: present
+    - name: Install itsdangerous package
+      pip:
+        name: itsdangerous==2.0.1
+        state: present
+
+    - name: Install Jinja2 package
+      pip:
+        name: Jinja2==3.0.2
+        state: present
+    - name: Install MarkupSafe package
+      pip:
+        name: MarkupSafe==2.0.1
+        state: present
+    - name: Install Werkzeug package
+      pip:
+        name: Werkzeug==2.0.2
+        state: present
