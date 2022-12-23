@@ -1,0 +1,41 @@
+---
+- hosts: all
+  become: yes
+
+  tasks:
+    - name: Install Nginx
+      apt:
+        name: nginx
+        state: latest
+        
+    - name: Install Pip
+      apt:
+        name: python3-pip
+        state: present
+
+    - name: Copy requirements.txt
+      copy: 
+        src: ../docker-hello-world/requirements.txt
+        dest: /docker-hello-world/requirements.txt
+    
+    - name: Copy Makefile
+      copy: 
+        src: ../docker-hello-world/Makefile
+        dest: /docker-hello-world/Makefile
+    
+    - name: Install Python-dependencies
+      shell: chdir=/docker-hello-world make install-local
+      notify: Restart Nginx
+
+    - name: Allow all access to tcp port 80
+      ufw:
+        rule: allow
+        port: '80'
+        proto: tcp
+
+  handlers:
+    - name: Restart Nginx
+      service:
+        name: nginx
+        state: restarted
+
