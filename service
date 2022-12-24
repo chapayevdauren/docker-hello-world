@@ -1,0 +1,13 @@
+[Unit]
+Description=Gunicorn instance to serve docker-hello-world
+After=network.target
+
+[Service]
+User=ubuntu
+Group=www-data
+WorkingDirectory=/home/ubuntu/docker-hello-world
+Environment="PATH=/home/ubuntu/docker-hello-world/env/bin"
+ExecStart=/home/ubuntu/docker-hello-world/env/bin/gunicorn --workers 3 --bind unix:docker-hello-world.sock -m 007 wsgi:app
+
+[Install]
+WantedBy=multi-user.target
