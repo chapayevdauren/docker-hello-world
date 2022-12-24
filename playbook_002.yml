@@ -1,0 +1,26 @@
+---
+- hosts: all
+  become: yes
+
+  tasks:
+    - name: Install Nginx
+      apt:
+	name: nginx
+        state: latest
+
+    - name: Install Pip
+      apt:
+	name: python3-pip
+        state: present
+
+    - name: Allow all access to tcp port 80
+      ufw:
+	rule: allow
+        port: '80'
+        proto: tcp
+
+  handlers:
+    - name: Restart Nginx
+      service:
+	name: nginx
+        state: restarted
