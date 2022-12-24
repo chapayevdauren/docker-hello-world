@@ -3,6 +3,6 @@ server {
 
     location / {
         include proxy_params;
-        proxy_pass http://unix:/home/ubuntu/docker-hello-world/docker-hello-world.sock;
+        proxy_pass http://localhost:5000;
     }
 }
