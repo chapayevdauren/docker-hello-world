@@ -1,0 +1,7 @@
+
+[webservers]
+red ansible_host=ubuntu@ec2-3-113-27-213.ap-northeast-1.compute.amazonaws.com
+[all:vars]
+ansible_python_interpreter=/usr/bin/python3
+
+
